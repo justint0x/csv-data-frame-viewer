@@ -57,8 +57,6 @@ function FileUpload({ setData }) {
         console.error('Error:', error);
       });
 
-    // Reset the file input after submission  
-    // setSelectedFile(null);
   };
 
   return (

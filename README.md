@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# DataFrame Viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This React application displays a dynamic DataFrame in table format. It parses data from a provided JSON input and renders it in a user-friendly table within the browser.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Dynamically renders a table based on JSON input.
+- Converts datetime and timedelta fields into readable formats.
+- Handles dynamic column setups and null values.
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React: A JavaScript library for building user interfaces.
+- JavaScript: The language used to construct the app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ensure you have Node.js and npm (Node Package Manager) installed on your machine. These are necessary to run and manage the React application.
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/justint0x/csv-data-frame-viewer.git
+   cd csv-data-frame-viewer
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install the dependencies:
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the Application
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Learn More
+### Code Overview
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **`App.js`**: The main component that imports and uses the `DataFrameTable` and `FileUpload` component.
+- **`DataFrameTable.js`**: Handles the parsing of JSON data and renders it as a table. It dynamically adjusts for fields specified in the JSON payload.
+- **`FileUpload`**: Handles a csv file upload to get response from Backend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### JSON Data Representation
 
-### Code Splitting
+The JSON payload is structured as follows:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```json
+{
+  "columns": ["Name", "Birthdate", "Score", "Grade", "Notice"],
+  "data": [
+    ["Alice", "1990-01-01T00:00:00", 90, "A", "86400.0"],
+    ["Bob", "1991-02-02T00:00:00", 75, "B", "172800.0"],
+    ["Charlie", "1992-03-03T00:00:00", 85, "A", null],
+    ["David", "1993-04-04T00:00:00", 70, "B", "259200.0"],
+    ["Eve", "1994-05-05T00:00:00", null, "A", "345600.0"]
+  ],
+  "data_types": ["object", "datetime64[ns]", "float64", "category", "timedelta64[ns]"]
+}
+```
 
-### Analyzing the Bundle Size
+- **Columns**: List of column names for the table.
+- **Data**: Nested arrays, each representing a row in the table.
+- **Data_Types**: Specifies the data type of each column, affecting how fields are rendered.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Custom Functions
 
-### Making a Progressive Web App
+- **`formatTimedelta`**: Converts seconds represented as strings or floats to a string formatted as "Xd Xh Xm Xs" (days, hours, minutes, seconds).
+- **Date Handling**: Converts ISO date strings to the local date format.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Acknowledgments
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React [https://reactjs.org/](https://reactjs.org/)
+- Open-source libraries used in this project.
